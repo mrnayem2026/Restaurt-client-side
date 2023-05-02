@@ -2,9 +2,14 @@ import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProviders/AuthProviders";
 import registerImg from '../../assets/register.png';
+import { updateProfile } from "firebase/auth";
 
 
 const Register = () => {
+
+    const [name, setName] = useState('');
+    const [photoUrl, setPhotoUrl] = useState('');
+
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
@@ -17,7 +22,19 @@ const Register = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const { createUser } = useContext(AuthContext);
+    const { createUser, user } = useContext(AuthContext);
+
+    // Handle Name 
+    const handleName = (e) => {
+        const nameInput = e.target.value;
+        setName(nameInput)
+    }
+
+    // Handle Photo URL
+    const handlePhotoUrl = (e) => {
+        const PhotoUrlInput = e.target.value;
+        setPhotoUrl(PhotoUrlInput)
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -37,18 +54,12 @@ const Register = () => {
                 setError('');
                 // event.target.reset();
                 setSuccess('User has been created successfully');
+                updateUserData(user, name, photoUrl);
             })
             .catch(error => {
                 console.error(error.message);
                 setError(error.message);
             })
-
-        // login
-        // login(email, password).then((result) => {
-        //     const user = result.user;
-        //     setUser(user);
-        //     navigate(location.state.pathname || "/");
-        // });
     };
 
     // uncontrolled component => controlled component
@@ -78,6 +89,20 @@ const Register = () => {
         }
     };
 
+
+    const updateUserData = (user, name, photoUrl) => {
+        updateProfile(user, {
+            displayName: name,
+            photoURL: photoUrl
+        }).then(() => {
+            console.log('user name updated')
+        })
+            .catch(error => {
+                setError(error.message);
+            })
+
+        console.log(user, name, photoUrl);
+    }
     // one way data binding
 
     return (
@@ -91,7 +116,11 @@ const Register = () => {
                     {/* name  */}
                     <div className="relative z-0  w-full mb-6 group">
                         <input
-                            type="text" name="name" id="name"
+                            type="text"
+                            name="name"
+                            id="name"
+                            value={name}
+                            onChange={handleName}
                             className={`block py-2.5 px-0 w-full text-sm text-black bg-transparent border-0 border-b-2  appearance-none focus:outline-none focus:ring-0  peer ${email
                                 ? emailError
                                     ? "border-red-500"
@@ -164,7 +193,11 @@ const Register = () => {
                     {/* photoURL  */}
                     <div className="relative z-0  w-full mb-6 group">
                         <input
-                            type="text" name="name" id="name"
+                            type="text"
+                            name="name"
+                            id="name"
+                            value={photoUrl}
+                            onChange={handlePhotoUrl}
                             className={`block py-2.5 px-0 w-full text-sm text-black bg-transparent border-0 border-b-2  appearance-none focus:outline-none focus:ring-0  peer ${email
                                 ? emailError
                                     ? "border-red-500"
