@@ -12,12 +12,12 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [emailError, setEmailError] = useState("");
 
-    const { setUser, login } = useContext(AuthContext);
+    const { signInWithGoogle, singInWithGithub, signIn } = useContext(AuthContext);
 
     const navigate = useNavigate();
     const location = useLocation();
 
-    console.log(location.state);
+    // console.log(location.state);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -31,11 +31,15 @@ const Login = () => {
         }
 
         // login
-        login(email, password).then((result) => {
-            const user = result.user;
-            setUser(user);
-            navigate(location.state.pathname || "/");
-        });
+        signIn(email, password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                // form.reset();
+            })
+            .catch(error => {
+                console.log(error)
+            })
     };
 
     // uncontrolled component => controlled component
@@ -64,6 +68,32 @@ const Login = () => {
             setEmailError("");
         }
     };
+
+    // Google signin 
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    // GitHub SignIn 
+    const handleGitHubSignIn = () => {
+        console.log("I am from github");
+        singInWithGithub()
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 
     // one way data binding
 
@@ -129,8 +159,8 @@ const Login = () => {
 
                     {/* <button className="btn btn-outline btn-info rounded-xl w-2/4">Login</button> */}
                     <div className='flex flex-col justify-center items-center gap-2'>
-                        <button className='btn hover:bg-zinc-800 hover:text-slate-50 bg-slate-50 text-black '><img src={google} alt="google icon" className='w-10 pr-2' />Singup with google</button>
-                        <button className='btn hover:bg-blue-300 hover:text-black bg-slate-50 text-black '><img src={github} alt="github icon" className='w-10 pr-2' />Singup with github</button>
+                        <button onClick={handleGoogleSignIn} className='btn hover:bg-zinc-800 hover:text-slate-50 bg-slate-50 text-black '><img src={google} alt="google icon" className='w-10 pr-2' />Singup with google</button>
+                        <button onClick={handleGitHubSignIn} className='btn hover:bg-blue-300 hover:text-black bg-slate-50 text-black '><img src={github} alt="github icon" className='w-10 pr-2' />Singup with github</button>
                         <button className="btn hover:bg-zinc-800 hover:text-slate-50 bg-slate-50 text-black  rounded-xl w-2/4">Login</button>
                     </div>
 
