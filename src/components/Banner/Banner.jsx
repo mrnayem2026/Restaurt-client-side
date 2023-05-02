@@ -1,16 +1,31 @@
 import React from 'react';
+import bannerImg from '../../assets/banner.png';
 
 const Banner = () => {
     return (
-        <div className="hero min-h-screen" style={{ backgroundImage: `url("/images/stock/photo-1507358522600-9f71e620c44e.jpg")` }}>
-            <div className="hero-overlay bg-opacity-60"></div>
-            <div className="hero-content text-center text-neutral-content">
-                <div className="max-w-md">
-                    <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-                    <p className="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                    <button className="btn btn-primary">Get Started</button>
-                </div>
+        <div className='container mx-auto  lg:flex justify-between lg:py-28'>
+            {/* banner section leftside start   */}
+            <div className='p-3 mb-4'>
+                <h1 className='text-3xl lg:text-7xl font-mono font-extrabold'>Good Food Made Easy <br />
+                    Are You Hungry ? </h1>
+                <p className='py-4 lg:py-6 text-lg '>
+                    This approach to cooking emphasizes the use of fresh, <br />
+                    whole ingredients, simple recipes, and time-saving <br />
+                    techniques to streamline meal preparation and ensure <br />
+                    that eating well is accessible to everyone. <br />
+                    By making good food easy, individuals can improve their health <br />
+                    and wellbeing while still enjoying the pleasures of delicious cuisine.
+                </p>
+
+                <button class="btn btn-outline rounded-lg uppercase">Learn more</button>
             </div>
+            {/* banner section leftside end   */}
+
+            {/* banner section rightside Start   */}
+            <div>
+                <img src={bannerImg} alt="Banner Image" />
+            </div>
+            {/* banner section rightside end   */}
         </div>
     );
 };
