@@ -17,7 +17,7 @@ const Banner = () => {
                     and wellbeing while still enjoying the pleasures of delicious cuisine.
                 </p>
 
-                <button class="btn btn-outline rounded-lg uppercase">Learn more</button>
+                <button className="btn btn-outline rounded-lg uppercase">Learn more</button>
             </div>
             {/* banner section leftside end   */}
 
