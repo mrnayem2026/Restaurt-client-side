@@ -6,6 +6,9 @@ import github from '../../assets/github.png';
 import google from '../../assets/google.png';
 
 const Login = () => {
+
+    const [error,setError] = useState("");
+
     const [password, setPassword] = useState("");
     const [passwordError, setPasswordError] = useState("");
 
@@ -21,6 +24,7 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const form = e.target;
 
         if (emailError) {
             e.target.email.focus();
@@ -34,26 +38,29 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 const loggedUser = result.user;
-                console.log(loggedUser);
-                // form.reset();
+                // console.log(loggedUser.photoURL);
+                form.reset();
+                setError('')
+                
             })
             .catch(error => {
-                console.log(error)
+                console.log(error.message)
+                setError("Email address or password doesn't match")
             })
     };
 
-    // uncontrolled component => controlled component
+    // handle passsword
     const handlePassword = (e) => {
         const passwordInput = e.target.value;
         setPassword(passwordInput);
         if (passwordInput.length < 6) {
             setPasswordError("Password must be at least 6 characters long");
-        } else if (!/.+[A-Z].+/.test(passwordInput)) {
-            setPasswordError("Password must contain at least one capital letter");
         } else {
             setPasswordError("");
         }
     };
+
+    // handle email 
 
     const handleEmail = (e) => {
         const emailInput = e.target.value;
@@ -107,6 +114,7 @@ const Login = () => {
             {/* login from strat */}
             <div className="mt-24 bg-gray-100 h-2/4 p-10">
                 <form onSubmit={handleSubmit} className="">
+                    <p className="text-red-500 py-6">{error}</p>
                     <div className="relative z-0  w-full mb-6 group">
                         <input
                             type="email"

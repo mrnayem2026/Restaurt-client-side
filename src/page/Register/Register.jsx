@@ -22,7 +22,7 @@ const Register = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const { createUser, user } = useContext(AuthContext);
+    const { createUser } = useContext(AuthContext);
 
     // Handle Name 
     const handleName = (e) => {
@@ -50,11 +50,11 @@ const Register = () => {
         createUser(email, password)
             .then(result => {
                 const loggedUser = result.user;
-                console.log(loggedUser);
                 setError('');
-                // event.target.reset();
+                e.target.reset();
                 setSuccess('User has been created successfully');
-                updateUserData(user, name, photoUrl);
+                updateUserData(loggedUser, name, photoUrl);
+                console.log(loggedUser, name, photoUrl);
             })
             .catch(error => {
                 console.error(error.message);
@@ -68,9 +68,7 @@ const Register = () => {
         setPassword(passwordInput);
         if (passwordInput.length < 6) {
             setPasswordError("Password must be at least 6 characters long");
-        } else if (!/.+[A-Z].+/.test(passwordInput)) {
-            setPasswordError("Password must contain at least one capital letter");
-        } else {
+        }else {
             setPasswordError("");
         }
     };
@@ -90,8 +88,8 @@ const Register = () => {
     };
 
 
-    const updateUserData = (user, name, photoUrl) => {
-        updateProfile(user, {
+    const updateUserData = (loggedUser, name, photoUrl) => {
+        updateProfile(loggedUser, {
             displayName: name,
             photoURL: photoUrl
         }).then(() => {
@@ -101,7 +99,7 @@ const Register = () => {
                 setError(error.message);
             })
 
-        console.log(user, name, photoUrl);
+        
     }
     // one way data binding
 
@@ -195,7 +193,7 @@ const Register = () => {
                         <input
                             type="text"
                             name="name"
-                            id="name"
+                            id="photo"
                             value={photoUrl}
                             onChange={handlePhotoUrl}
                             className={`block py-2.5 px-0 w-full text-sm text-black bg-transparent border-0 border-b-2  appearance-none focus:outline-none focus:ring-0  peer ${email

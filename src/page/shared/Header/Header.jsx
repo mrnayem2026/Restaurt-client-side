@@ -5,14 +5,34 @@ import {
     XMarkIcon,
 } from '@heroicons/react/24/solid'
 import logo from '../../../assets/logo.png'
+import { useContext } from 'react';
+import { AuthContext } from '../../../providers/AuthProviders/AuthProviders';
+import spinner  from '../../../assets/loading.gif'
+// import spinner  from '../../../assets/spinner.gif'
+
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const { user, loading, logOut } = useContext(AuthContext);
+
+    if (loading) {
+        // return <progress className="progress w-56"></progress>
+        return <div className='flex justify-center  mt-60'><img src={spinner} alt="" /></div>
+    }
+
+    // logout function 
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.error(error))
+    }
+
+    // console.log(user.photoURL);
     return (
         <nav className='relative container  mx-auto flex justify-between  my-7'>
 
             <Link to='/'>
-            <img src={logo} alt="Restaurt" className='h-6' />
+                <img src={logo} alt="Restaurt" className='h-6' />
             </Link>
 
             <div>
@@ -39,16 +59,21 @@ const Header = () => {
                             to='/register'
                             className={({ isActive }) => (isActive ? 'active' : 'default')}
                         >
-                           Register
+                            Register
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink
-                            to='/login'
-                            className={({ isActive }) => (isActive ? 'active' : 'default')}
-                        >
-                            Login
-                        </NavLink>
+                        {
+                            user ? <div>
+                                <NavLink onClick={handleLogOut} className={({ isActive }) => (isActive ? 'active' : 'default')}>Loguot</NavLink>
+                                
+                                </div> : <NavLink
+                                to='/login'
+                                className={({ isActive }) => (isActive ? 'active' : 'default')}
+                            >
+                                Login
+                            </NavLink>
+                        }
                     </li>
                 </ul>
                 {/* Nav Items Section for lerge device End*/}
@@ -70,7 +95,7 @@ const Header = () => {
                                 <div className='flex items-center justify-between mb-4'>
                                     <div>
                                         <Link to='/' className='inline-flex items-center'>
-                                        <img src={logo} alt="Restaurt" className='h-6' />
+                                            <img src={logo} alt="Restaurt" className='h-6' />
                                         </Link>
                                     </div>
                                     {/* Dropdown menu close button */}
@@ -113,7 +138,7 @@ const Header = () => {
                                                 to='/login'
                                                 className='font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-400'
                                             >
-                                               Login
+                                                Login
                                             </Link>
                                         </li>
                                     </ul>
