@@ -11,5 +11,5 @@ Hosted in Firebase -> [Restaurt](https://restaurt-client-side.web.app/)
 - Find out more about the restaurant's chefs.
 - You can login with Google and Github.
 - You can download pdf with answers to some important questions.
-- You will know about the process of Restaurt.
+- You can register with email and password, name and photourl.
 
