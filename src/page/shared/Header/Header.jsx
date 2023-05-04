@@ -17,7 +17,7 @@ const Header = () => {
 
     if (loading) {
         // return <progress className="progress w-56"></progress>
-        return <div className='flex justify-center  mt-60'><img src={spinner} alt="" /></div>
+        // return <div className='flex justify-center  mt-60'><img src={spinner} alt="" /></div>
     }
 
     // logout function 

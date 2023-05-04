@@ -1,5 +1,6 @@
 import React from 'react';
 import bannerImg from '../../assets/banner.png';
+import LazyLoad from 'react-lazy-load';
 
 const Banner = () => {
     return (
@@ -23,7 +24,10 @@ const Banner = () => {
 
             {/* banner section rightside Start   */}
             <div>
-                <img src={bannerImg} alt="Banner Image" />
+                <LazyLoad height={762}>
+                    <img src={bannerImg} alt="Banner Image" />
+                </LazyLoad>
+
             </div>
             {/* banner section rightside end   */}
         </div>
