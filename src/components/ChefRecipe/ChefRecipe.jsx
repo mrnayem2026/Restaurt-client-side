@@ -3,7 +3,6 @@ import { useLoaderData, useParams } from 'react-router-dom';
 import ReciipeCard from '../ReciipeCard/ReciipeCard';
 
 const ChefRecipe = () => {
-    // const { id } = useParams();
     const chefRecipe = useLoaderData();
     const { id, name, years_of_experience, number_of_recipes, likes, picture, description } = chefRecipe;
 

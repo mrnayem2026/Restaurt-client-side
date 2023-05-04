@@ -7,7 +7,7 @@ import {
 import logo from '../../../assets/logo.png'
 import { useContext } from 'react';
 import { AuthContext } from '../../../providers/AuthProviders/AuthProviders';
-import spinner  from '../../../assets/loading.gif'
+import spinner from '../../../assets/loading.gif'
 // import spinner  from '../../../assets/spinner.gif'
 
 
@@ -15,9 +15,9 @@ const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const { user, loading, logOut } = useContext(AuthContext);
 
+    console.log(user?.photoURL);
     if (loading) {
-        // return <progress className="progress w-56"></progress>
-        // return <div className='flex justify-center  mt-60'><img src={spinner} alt="" /></div>
+        return <div className='flex justify-center  mt-60'><img src={spinner} alt="" /></div>
     }
 
     // logout function 
@@ -64,10 +64,10 @@ const Header = () => {
                     </li>
                     <li>
                         {
-                            user ? <div>
+                            user ? <div className='flex gap-6'>
                                 <NavLink onClick={handleLogOut} className={({ isActive }) => (isActive ? 'active' : 'default')}>Loguot</NavLink>
-                                
-                                </div> : <NavLink
+                                <img src={user?.photoURL} alt=""  className='h-14 rounded-full'/>
+                            </div> : <NavLink
                                 to='/login'
                                 className={({ isActive }) => (isActive ? 'active' : 'default')}
                             >

@@ -41,7 +41,7 @@ const Login = () => {
                 // console.log(loggedUser.photoURL);
                 form.reset();
                 setError('')
-                
+                navigate("/");
             })
             .catch(error => {
                 console.log(error.message)

@@ -53,6 +53,7 @@ const Register = () => {
                 setError('');
                 e.target.reset();
                 setSuccess('User has been created successfully');
+                navigate("/");
                 updateUserData(loggedUser, name, photoUrl);
                 console.log(loggedUser, name, photoUrl);
             })
@@ -68,7 +69,7 @@ const Register = () => {
         setPassword(passwordInput);
         if (passwordInput.length < 6) {
             setPasswordError("Password must be at least 6 characters long");
-        }else {
+        } else {
             setPasswordError("");
         }
     };
@@ -99,7 +100,7 @@ const Register = () => {
                 setError(error.message);
             })
 
-        
+
     }
     // one way data binding
 
@@ -109,8 +110,10 @@ const Register = () => {
             {/* Register from strat */}
             <div className="mt-24 bg-gray-100 h-2/4 p-10">
                 <form onSubmit={handleSubmit} className="">
-                    <p className='text-danger'>{error}</p>
-                    <p className='text-success'>{success}</p>
+                    <div className="py-6">
+                        <p className='text-red-500'>{error}</p>
+                        <p className='text-green-500'>{success}</p>
+                    </div>
                     {/* name  */}
                     <div className="relative z-0  w-full mb-6 group">
                         <input
