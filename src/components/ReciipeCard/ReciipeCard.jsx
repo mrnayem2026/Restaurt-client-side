@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Rating } from '@smastrom/react-rating'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import '@smastrom/react-rating/style.css'
 
 const ReciipeCard = ({ recipe }) => {
+
+    const [disable,setDisable] = useState(false);
+
     const { recipeName, picture, cookingMethod, rating } = recipe;
+
+    const notify = () => {
+        toast("The recipe is my favorite!");
+        setDisable(true)
+    }
+
+
     return (
         <div className="card w-96 bg-base-100 shadow-xl bg-gray-200  text-black">
             <figure><img src={picture} alt="Shoes" /></figure>
@@ -16,8 +30,18 @@ const ReciipeCard = ({ recipe }) => {
                         ))}
                     </ul>
                 </div>
+
+                {/* Rating  */}
+                <div className='flex gap-2'>
+                    <Rating
+                        style={{ maxWidth: 100 }}
+                        value={Math.round(rating)} readOnly />
+                    <span className='ms-2'> {rating}</span>
+                </div>
+
                 <div className="card-actions ">
-                    <button className="btn rounded-lg">Favorite</button>
+                    <button className="btn rounded-lg" onClick={notify} disabled={disable}>Favorite</button>
+                    <ToastContainer />
                 </div>
             </div>
         </div>
