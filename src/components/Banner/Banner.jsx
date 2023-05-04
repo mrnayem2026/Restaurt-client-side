@@ -24,7 +24,7 @@ const Banner = () => {
 
             {/* banner section rightside Start   */}
             <div>
-                <LazyLoad height={762}>
+                <LazyLoad height={400}>
                     <img src={bannerImg} alt="Banner Image" />
                 </LazyLoad>
 

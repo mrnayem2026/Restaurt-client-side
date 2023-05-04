@@ -15,8 +15,8 @@ const Chef = () => {
             .catch(error => console.error(error))
     },[])
     return (
-        <div className='p-3 mb-4 container mx-auto'>
-            <h1 className='text-center text-4xl lg:text-8xl py-6 lg:py-14 font-black font-mono'>Our Chef</h1>
+        <div className=' mb-4 container mx-auto'>
+            <h1 className='text-center text-6xl lg:text-8xl py-2 lg:py-14 font-black font-mono'>Our Chef</h1>
             <div className='grid lg:grid-cols-3 gap-6'>
                 {
                     chefs.map((chef)=><ChefCard key={chef.id} chef={chef}></ChefCard>)

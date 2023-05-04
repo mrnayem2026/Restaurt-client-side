@@ -54,19 +54,19 @@ const Header = () => {
                             Blog
                         </NavLink>
                     </li>
-                    <li>
+                    {/* <li>
                         <NavLink
                             to='/register'
                             className={({ isActive }) => (isActive ? 'active' : 'default')}
                         >
                             Register
                         </NavLink>
-                    </li>
+                    </li> */}
                     <li>
                         {
                             user ? <div className='flex gap-6'>
                                 <NavLink onClick={handleLogOut} className={({ isActive }) => (isActive ? 'active' : 'default')}>Loguot</NavLink>
-                                <img src={user?.photoURL} alt="" className='h-14 rounded-full'data-tooltip-id="my-tooltip" data-tooltip-content={name} />
+                                <img src={user?.photoURL} alt="" className='h-14 rounded-full' data-tooltip-id="my-tooltip" data-tooltip-content={name} />
                                 <Tooltip id="my-tooltip" />
                             </div> : <NavLink
                                 to='/login'
@@ -127,20 +127,18 @@ const Header = () => {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link
-                                                to='/appliedJobs'
-                                                className='font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-400'
-                                            >
-                                                Register
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link
-                                                to='/login'
-                                                className='font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-blue-400'
-                                            >
-                                                Login
-                                            </Link>
+                                            {
+                                                user ? <div className='flex gap-6'>
+                                                    <NavLink onClick={handleLogOut} className={({ isActive }) => (isActive ? 'active' : 'default')}>Loguot</NavLink>
+                                                    <img src={user?.photoURL} alt="" className='h-14 rounded-full' data-tooltip-id="my-tooltip" data-tooltip-content={name} />
+                                                    <Tooltip id="my-tooltip" />
+                                                </div> : <NavLink
+                                                    to='/login'
+                                                    className={({ isActive }) => (isActive ? 'active' : 'default')}
+                                                >
+                                                    Login
+                                                </NavLink>
+                                            }
                                         </li>
                                     </ul>
                                 </nav>

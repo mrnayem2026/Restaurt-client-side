@@ -19,8 +19,9 @@ const Login = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
+    console.log(location)
 
-    // console.log(location.state);
+    const from = location.state?.from?.pathname || '/';
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -41,7 +42,7 @@ const Login = () => {
                 // console.log(loggedUser.photoURL);
                 form.reset();
                 setError('')
-                navigate("/");
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 console.log(error.message)
