@@ -18,22 +18,3 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export default app;
 
-
-
-
-
-
-
-
-
-
-// Your web app's Firebase configuration
-// const firebaseConfig = {
-// Previews
-//   apiKey: "AIzaSyCLQYdER2E_gpSLhMmuKsnmQP201UzKIyU",
-//   authDomain: "restaurt-client-side.firebaseapp.com",
-//   projectId: "restaurt-client-side",
-//   storageBucket: "restaurt-client-side.appspot.com",
-//   messagingSenderId: "627309586373",
-//   appId: "1:627309586373:web:d6390af79b7ae0a9a28dac"
-// };

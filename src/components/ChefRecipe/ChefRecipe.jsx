@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLoaderData, useParams } from 'react-router-dom';
+import ReciipeCard from '../ReciipeCard/ReciipeCard';
 
 const ChefRecipe = () => {
     // const { id } = useParams();
@@ -30,7 +31,15 @@ const ChefRecipe = () => {
                 </div>
                 {/* text section End  */}
             </div>
-            
+
+            {/* Recipes Card section  */}
+            <h1 className='text-center text-8xl font-mono font-black py-28'>Chef's Rsecipes</h1>
+            <div className='grid grid-cols-3 gap-6'>
+                {
+                    chefRecipe.recipes.map((recipe)=> <ReciipeCard key={recipe.id} recipe={recipe}></ReciipeCard>)
+                }
+
+            </div>
         </div>
     );
 };
